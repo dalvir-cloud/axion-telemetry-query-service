@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  DOCKER_IMAGE: devopsinsiders/axion-telemetry-query-service
+  DOCKER_IMAGE: ${{ secrets.ACR_LOGIN_SERVER }}/axion-telemetry-query-service
 
 jobs:
   build-and-push:
@@ -23,6 +23,7 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
+          registry: ${{ secrets.ACR_LOGIN_SERVER }}
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
